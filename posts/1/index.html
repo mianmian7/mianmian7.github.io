@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Apache 默认配置文件httpd.conf | mianmian7 的博客</title>
+
+    
+<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+
+
+<meta name="author" content="mianmian7" />
+<meta name="description" content="Apache 默认配置文件httpd.conf
+" />
+
+
+
+<meta name="generator" content="Hugo 0.76.2" />
+
+<link rel="canonical" href="https://mianmian7.me/posts/1/" />
+
+
+<meta property="og:title" content="Apache 默认配置文件httpd.conf" />
+<meta property="og:description" content="Apache 默认配置文件httpd.conf" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://mianmian7.me/posts/1/" />
+<meta property="og:image" content="https://mianmian7.me/me/background.jpg"/>
+<meta property="article:published_time" content="2020-10-25T15:56:29+08:00" />
+<meta property="article:modified_time" content="2020-10-25T15:56:29+08:00" />
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://mianmian7.me/me/background.jpg"/>
+
+<meta name="twitter:title" content="Apache 默认配置文件httpd.conf"/>
+<meta name="twitter:description" content="Apache 默认配置文件httpd.conf"/>
+
+
+<link rel="stylesheet" href="/css/semantic.min.css" />
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="/css/OverlayScrollbars.min.css" />
+<link rel="stylesheet" href="/css/github-markdown.css" />
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  a:hover {
+    text-decoration: underline; 
+  }
+
+  
+  a {
+    color: seagreen !important;
+  }
+  
+
+  
+  .inverted a,
+  .inverted a:hover {
+     color: darkseagreen !important;
+  }
+  
+
+  
+  body.default {
+    
+    background-color: #ccc;
+    
+
+    
+    background-image: url(/me/background.jpg);
+    
+  }
+  
+
+  
+  body.dark {
+    
+    background-color: black;
+    
+
+    
+    background-image: url(/me/background-dark.jpg);
+    
+  }
+  
+</style>
+
+    
+
+
+  
+    <link rel="stylesheet" data-highlight href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/gruvbox-light.min.css" />
+  
+
+
+
+
+
+  </head>
+
+  <body class="default">
+    
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="翻转！"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="首页" onclick="window.location.href = 'https:\/\/mianmian7.me'"></i>
+  </div>
+  <div class="item">
+    <i class="large link icon theme-switch" onclick="themeSwitch()"></i>
+  </div>
+  
+  <div class="item">
+    <i class="large link search icon" onclick="toggleSearch()"></i>
+  </div>
+  
+</nav>
+
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          <div class="dream-max-width">
+            
+<div class="ui centered relaxed grid dream-grid">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    
+    <section class="ui top attached segment cover">
+      <div class="cover-img" style="background-image: url(/img/0.jpg);"></div>
+    </section>
+    
+    <section class="ui attached segment">
+      <header>
+        <h1 class="ui large header">
+          Apache 默认配置文件httpd.conf
+          <div class="sub header">
+            @
+            
+              
+                mianmian7
+              
+            
+
+            | 
+                星期日，十月 25 日，2020 年
+              
+
+            | 4 分钟阅读
+
+            | 更新于
+              
+                星期日，十月 25 日，2020 年
+              
+          </div>
+        </h1>
+      </header>
+
+      <article class="main"><p>Apache 默认配置文件httpd.conf</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SHELL" data-lang="SHELL"><span style="color:#75715e">#apache根目录（安装目录）</span>
+Define SRVROOT <span style="color:#e6db74">&#34;C:/文件/Apache24&#34;</span>
+ServerRoot <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SRVROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+
+
+<span style="color:#75715e">#Apache指定监听的ip和端口</span>
+<span style="color:#75715e">#Listen 12.34.56.78:80</span>
+Listen <span style="color:#ae81ff">80</span>
+
+
+<span style="color:#75715e">#apache加载动态模块</span>
+LoadModule access_compat_module modules/mod_access_compat.so
+LoadModule actions_module modules/mod_actions.so
+LoadModule alias_module modules/mod_alias.so
+LoadModule allowmethods_module modules/mod_allowmethods.so
+LoadModule asis_module modules/mod_asis.so
+LoadModule auth_basic_module modules/mod_auth_basic.so
+<span style="color:#75715e">#LoadModule auth_digest_module modules/mod_auth_digest.so</span>
+<span style="color:#75715e">#LoadModule auth_form_module modules/mod_auth_form.so</span>
+<span style="color:#75715e">#LoadModule authn_anon_module modules/mod_authn_anon.so</span>
+LoadModule authn_core_module modules/mod_authn_core.so
+<span style="color:#75715e">#LoadModule authn_dbd_module modules/mod_authn_dbd.so</span>
+<span style="color:#75715e">#LoadModule authn_dbm_module modules/mod_authn_dbm.so</span>
+LoadModule authn_file_module modules/mod_authn_file.so
+<span style="color:#75715e">#LoadModule authn_socache_module modules/mod_authn_socache.so</span>
+<span style="color:#75715e">#LoadModule authnz_fcgi_module modules/mod_authnz_fcgi.so</span>
+<span style="color:#75715e">#LoadModule authnz_ldap_module modules/mod_authnz_ldap.so</span>
+LoadModule authz_core_module modules/mod_authz_core.so
+<span style="color:#75715e">#LoadModule authz_dbd_module modules/mod_authz_dbd.so</span>
+<span style="color:#75715e">#LoadModule authz_dbm_module modules/mod_authz_dbm.so</span>
+LoadModule authz_groupfile_module modules/mod_authz_groupfile.so
+LoadModule authz_host_module modules/mod_authz_host.so
+<span style="color:#75715e">#LoadModule authz_owner_module modules/mod_authz_owner.so</span>
+LoadModule authz_user_module modules/mod_authz_user.so
+LoadModule autoindex_module modules/mod_autoindex.so
+<span style="color:#75715e">#LoadModule buffer_module modules/mod_buffer.so</span>
+<span style="color:#75715e">#LoadModule cache_module modules/mod_cache.so</span>
+<span style="color:#75715e">#LoadModule cache_disk_module modules/mod_cache_disk.so</span>
+<span style="color:#75715e">#LoadModule cache_socache_module modules/mod_cache_socache.so</span>
+<span style="color:#75715e">#LoadModule cern_meta_module modules/mod_cern_meta.so</span>
+LoadModule cgi_module modules/mod_cgi.so
+<span style="color:#75715e">#LoadModule charset_lite_module modules/mod_charset_lite.so</span>
+<span style="color:#75715e">#LoadModule data_module modules/mod_data.so</span>
+<span style="color:#75715e">#LoadModule dav_module modules/mod_dav.so</span>
+<span style="color:#75715e">#LoadModule dav_fs_module modules/mod_dav_fs.so</span>
+<span style="color:#75715e">#LoadModule dav_lock_module modules/mod_dav_lock.so</span>
+<span style="color:#75715e">#LoadModule dbd_module modules/mod_dbd.so</span>
+<span style="color:#75715e">#LoadModule deflate_module modules/mod_deflate.so</span>
+LoadModule dir_module modules/mod_dir.so
+<span style="color:#75715e">#LoadModule dumpio_module modules/mod_dumpio.so</span>
+LoadModule env_module modules/mod_env.so
+<span style="color:#75715e">#LoadModule expires_module modules/mod_expires.so</span>
+<span style="color:#75715e">#LoadModule ext_filter_module modules/mod_ext_filter.so</span>
+<span style="color:#75715e">#LoadModule file_cache_module modules/mod_file_cache.so</span>
+<span style="color:#75715e">#LoadModule filter_module modules/mod_filter.so</span>
+<span style="color:#75715e">#LoadModule headers_module modules/mod_headers.so</span>
+<span style="color:#75715e">#LoadModule heartbeat_module modules/mod_heartbeat.so</span>
+<span style="color:#75715e">#LoadModule heartmonitor_module modules/mod_heartmonitor.so</span>
+<span style="color:#75715e">#LoadModule http2_module modules/mod_http2.so</span>
+<span style="color:#75715e">#LoadModule ident_module modules/mod_ident.so</span>
+<span style="color:#75715e">#LoadModule imagemap_module modules/mod_imagemap.so</span>
+LoadModule include_module modules/mod_include.so
+LoadModule info_module modules/mod_info.so
+LoadModule isapi_module modules/mod_isapi.so
+<span style="color:#75715e">#LoadModule lbmethod_bybusyness_module modules/mod_lbmethod_bybusyness.so</span>
+<span style="color:#75715e">#LoadModule lbmethod_byrequests_module modules/mod_lbmethod_byrequests.so</span>
+<span style="color:#75715e">#LoadModule lbmethod_bytraffic_module modules/mod_lbmethod_bytraffic.so</span>
+<span style="color:#75715e">#LoadModule lbmethod_heartbeat_module modules/mod_lbmethod_heartbeat.so</span>
+<span style="color:#75715e">#LoadModule ldap_module modules/mod_ldap.so</span>
+<span style="color:#75715e">#LoadModule logio_module modules/mod_logio.so</span>
+LoadModule log_config_module modules/mod_log_config.so
+<span style="color:#75715e">#LoadModule log_debug_module modules/mod_log_debug.so</span>
+<span style="color:#75715e">#LoadModule log_forensic_module modules/mod_log_forensic.so</span>
+<span style="color:#75715e">#LoadModule lua_module modules/mod_lua.so</span>
+<span style="color:#75715e">#LoadModule macro_module modules/mod_macro.so</span>
+LoadModule mime_module modules/mod_mime.so
+<span style="color:#75715e">#LoadModule mime_magic_module modules/mod_mime_magic.so</span>
+LoadModule negotiation_module modules/mod_negotiation.so
+LoadModule proxy_module modules/mod_proxy.so
+<span style="color:#75715e">#LoadModule proxy_ajp_module modules/mod_proxy_ajp.so</span>
+<span style="color:#75715e">#LoadModule proxy_balancer_module modules/mod_proxy_balancer.so</span>
+<span style="color:#75715e">#LoadModule proxy_connect_module modules/mod_proxy_connect.so</span>
+<span style="color:#75715e">#LoadModule proxy_express_module modules/mod_proxy_express.so</span>
+<span style="color:#75715e">#LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so</span>
+<span style="color:#75715e">#LoadModule proxy_ftp_module modules/mod_proxy_ftp.so</span>
+<span style="color:#75715e">#LoadModule proxy_html_module modules/mod_proxy_html.so</span>
+LoadModule proxy_http_module modules/mod_proxy_http.so
+<span style="color:#75715e">#LoadModule proxy_http2_module modules/mod_proxy_http2.so</span>
+<span style="color:#75715e">#LoadModule proxy_scgi_module modules/mod_proxy_scgi.so</span>
+<span style="color:#75715e">#LoadModule proxy_wstunnel_module modules/mod_proxy_wstunnel.so</span>
+<span style="color:#75715e">#LoadModule ratelimit_module modules/mod_ratelimit.so</span>
+<span style="color:#75715e">#LoadModule reflector_module modules/mod_reflector.so</span>
+<span style="color:#75715e">#LoadModule remoteip_module modules/mod_remoteip.so</span>
+<span style="color:#75715e">#LoadModule request_module modules/mod_request.so</span>
+<span style="color:#75715e">#LoadModule reqtimeout_module modules/mod_reqtimeout.so</span>
+<span style="color:#75715e">#LoadModule rewrite_module modules/mod_rewrite.so</span>
+<span style="color:#75715e">#LoadModule sed_module modules/mod_sed.so</span>
+<span style="color:#75715e">#LoadModule session_module modules/mod_session.so</span>
+<span style="color:#75715e">#LoadModule session_cookie_module modules/mod_session_cookie.so</span>
+<span style="color:#75715e">#LoadModule session_crypto_module modules/mod_session_crypto.so</span>
+<span style="color:#75715e">#LoadModule session_dbd_module modules/mod_session_dbd.so</span>
+LoadModule setenvif_module modules/mod_setenvif.so
+<span style="color:#75715e">#LoadModule slotmem_plain_module modules/mod_slotmem_plain.so</span>
+<span style="color:#75715e">#LoadModule slotmem_shm_module modules/mod_slotmem_shm.so</span>
+<span style="color:#75715e">#LoadModule socache_dbm_module modules/mod_socache_dbm.so</span>
+<span style="color:#75715e">#LoadModule socache_memcache_module modules/mod_socache_memcache.so</span>
+LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
+<span style="color:#75715e">#LoadModule speling_module modules/mod_speling.so</span>
+<span style="color:#75715e">#LoadModule ssl_module modules/mod_ssl.so</span>
+LoadModule status_module modules/mod_status.so
+<span style="color:#75715e">#LoadModule substitute_module modules/mod_substitute.so</span>
+<span style="color:#75715e">#LoadModule unique_id_module modules/mod_unique_id.so</span>
+<span style="color:#75715e">#LoadModule userdir_module modules/mod_userdir.so</span>
+<span style="color:#75715e">#LoadModule usertrack_module modules/mod_usertrack.so</span>
+<span style="color:#75715e">#LoadModule version_module modules/mod_version.so</span>
+<span style="color:#75715e">#LoadModule vhost_alias_module modules/mod_vhost_alias.so</span>
+<span style="color:#75715e">#LoadModule watchdog_module modules/mod_watchdog.so</span>
+<span style="color:#75715e">#LoadModule xml2enc_module modules/mod_xml2enc.so</span>
+
+<span style="color:#75715e"># </span>
+&lt;IfModule unixd_module&gt;
+
+User daemon
+Group daemon
+
+&lt;/IfModule&gt;
+
+<span style="color:#75715e">#服务员邮箱地址，出问题发送到这个地址</span>
+ServerAdmin admin@example.com
+
+<span style="color:#75715e">#服务地址</span>
+ServerName localhost:80
+
+<span style="color:#75715e">#设置根目录的访问权限</span>
+<span style="color:#75715e">#Options：配置在特定目录使用哪些特性，常用的值和基本含义如下：</span>
+<span style="color:#75715e">#       All: 除MultViews的所有选项</span>
+<span style="color:#75715e">#       ExecCGI: 在该目录下允许执行CGI脚本。</span>
+<span style="color:#75715e">#       FollowSymLinks: 在该目录下允许文件系统使用符号连接。</span>
+<span style="color:#75715e">#       Indexes: 当用户访问该目录时，如果用户找不到DirectoryIndex指定的主页文件(例如index.html),则返回该目录下的文件列表给用户。</span>
+<span style="color:#75715e">#       SymLinksIfOwnerMatch: 当使用符号连接时，只有当符号连接的文件拥有者与实际文件的拥有者相同时才可以访问。</span>
+<span style="color:#75715e">#AllowOverride：允许存在于.htaccess文件中的指令类型(.htaccess文件名是可以改变的，其文件名由AccessFileName指令决定)：</span>
+<span style="color:#75715e">#       None: 当AllowOverride被设置为None时。不搜索该目录下的.htaccess文件（可以减小服务器开销）。</span>
+<span style="color:#75715e">#       All: 在.htaccess文件中可以使用所有的指令。</span>
+
+<span style="color:#75715e">#Order：控制在访问时Allow和Deny两个访问规则哪个优先：</span>
+<span style="color:#75715e">#Allow：允许访问的主机列表(可用域名或子网，例如：Allow from 192.168.0.0/16)。</span>
+<span style="color:#75715e">#Deny：拒绝访问的主机列表。</span>
+<span style="color:#75715e">#DirectoryIndex index.html index.htm index.PHP #主页文件的设置（本例将主页文件设置为：index.html,index.htm和index.php）</span>
+&lt;Directory /&gt;
+    AllowOverride none
+    Require all denied
+&lt;/Directory&gt;
+
+
+<span style="color:#75715e">#指定默认站点目录</span>
+DocumentRoot <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SRVROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">/htdocs&#34;</span>
+&lt;Directory <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SRVROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">/htdocs&#34;</span>&gt;
+    
+    Options Indexes FollowSymLinks
+
+    AllowOverride None
+
+    <span style="color:#75715e">#</span>
+    <span style="color:#75715e"># 控制谁可以从此服务器获取内容。</span>
+    <span style="color:#75715e">#</span>
+    Require all granted
+&lt;/Directory&gt;
+
+<span style="color:#75715e">#</span>
+<span style="color:#75715e"># 设置索引文件 首页文件（首页文件可以有多个，可以用空格匹配多个）</span>
+<span style="color:#75715e">#</span>
+&lt;IfModule dir_module&gt;
+    DirectoryIndex index.html
+&lt;/IfModule&gt;
+
+<span style="color:#75715e">#</span>
+<span style="color:#75715e"># The following lines prevent .htaccess and .htpasswd files from being </span>
+<span style="color:#75715e"># viewed by Web clients. </span>
+<span style="color:#75715e">#</span>
+&lt;Files <span style="color:#e6db74">&#34;.ht*&#34;</span>&gt;
+    Require all denied
+&lt;/Files&gt;
+
+<span style="color:#75715e">#错误日志路径</span>
+ErrorLog <span style="color:#e6db74">&#34;logs/error.log&#34;</span>
+
+<span style="color:#75715e">#日志级别</span>
+<span style="color:#75715e">#debug, info, notice, warn, error, crit,alert, emerg.</span>
+LogLevel warn
+
+&lt;IfModule log_config_module&gt;
+    
+    <span style="color:#75715e">#combined 日志的格式</span>
+    LogFormat <span style="color:#e6db74">&#34;%h %l %u %t \&#34;%r\&#34; %&gt;s %b \&#34;%{Referer}i\&#34; \&#34;%{User-Agent}i\&#34;&#34;</span> combined     
+    <span style="color:#75715e">#common 日志的格式</span>
+    LogFormat <span style="color:#e6db74">&#34;%h %l %u %t \&#34;%r\&#34; %&gt;s %b&#34;</span> common
+
+    &lt;IfModule logio_module&gt;
+      <span style="color:#75715e"># 您需要启用mod_logio.c才能使用％I和％O</span>
+      LogFormat <span style="color:#e6db74">&#34;%h %l %u %t \&#34;%r\&#34; %&gt;s %b \&#34;%{Referer}i\&#34; \&#34;%{User-Agent}i\&#34; %I %O&#34;</span> combinedio
+    &lt;/IfModule&gt;
+
+    <span style="color:#75715e">#默认站点访问日志配置</span>
+    CustomLog <span style="color:#e6db74">&#34;logs/access.log&#34;</span> common
+
+    <span style="color:#75715e">#combined访问日志配置</span>
+    <span style="color:#75715e">#CustomLog &#34;logs/access.log&#34; combined</span>
+&lt;/IfModule&gt;
+
+<span style="color:#75715e">#cgi配置 无特殊需求不用考虑</span>
+&lt;IfModule alias_module&gt;
+    
+    ScriptAlias /cgi-bin/ <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SRVROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">/cgi-bin/&#34;</span>
+
+&lt;/IfModule&gt;
+
+&lt;IfModule cgid_module&gt;
+    
+    <span style="color:#75715e">#Scriptsock logs/cgisock</span>
+&lt;/IfModule&gt;
+
+
+&lt;Directory <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SRVROOT<span style="color:#e6db74">}</span><span style="color:#e6db74">/cgi-bin&#34;</span>&gt;
+    AllowOverride None
+    Options None
+    Require all granted
+&lt;/Directory&gt;
+
+&lt;IfModule mime_module&gt;
+    
+    <span style="color:#75715e">#允许传送时用一下几种压缩方式</span>
+    TypesConfig conf/mime.types
+    <span style="color:#75715e">#AddType application/x-gzip .tgz  </span>
+    AddType application/x-compress .Z
+    AddType application/x-gzip .gz .tgz    
+    <span style="color:#75715e">#AddHandler cgi-script .cgi .pl</span>
+    <span style="color:#75715e">#AddType text/html .shtml</span>
+    <span style="color:#75715e">#AddOutputFilter INCLUDES .shtml</span>
+&lt;/IfModule&gt;
+
+
+
+<span style="color:#75715e"># 几种错误的跳转界面</span>
+<span style="color:#75715e">#ErrorDocument 500 &#34;The server made a boo boo.&#34;</span>
+<span style="color:#75715e">#ErrorDocument 404 /missing.html</span>
+<span style="color:#75715e">#ErrorDocument 404 &#34;/cgi-bin/missing_handler.pl&#34;</span>
+<span style="color:#75715e">#ErrorDocument 402 http://www.example.com/subscription_info.html</span>
+<span style="color:#75715e">#</span>
+
+
+<span style="color:#75715e">#MaxRanges unlimited</span>
+
+<span style="color:#75715e">#EnableMMAP off</span>
+<span style="color:#75715e">#EnableSendfile on</span>
+
+<span style="color:#75715e">#AcceptFilter http none</span>
+<span style="color:#75715e">#AcceptFilter https none</span>
+
+<span style="color:#75715e">#开启一些包含文件的配置</span>
+<span style="color:#75715e"># Server-pool management (MPM specific)</span>
+<span style="color:#75715e">#Include conf/extra/httpd-mpm.conf</span>
+
+<span style="color:#75715e"># Multi-language error messages</span>
+<span style="color:#75715e">#Include conf/extra/httpd-multilang-errordoc.conf</span>
+
+<span style="color:#75715e"># Fancy directory listings</span>
+Include conf/extra/httpd-autoindex.conf
+
+<span style="color:#75715e"># Language settings</span>
+<span style="color:#75715e">#Include conf/extra/httpd-languages.conf</span>
+
+<span style="color:#75715e"># User home directories</span>
+<span style="color:#75715e">#Include conf/extra/httpd-userdir.conf</span>
+
+<span style="color:#75715e"># Real-time info on requests and configuration</span>
+Include conf/extra/httpd-info.conf
+
+<span style="color:#75715e"># Virtual hosts</span>
+<span style="color:#75715e">#Include conf/extra/httpd-vhosts.conf</span>
+
+<span style="color:#75715e"># Local access to the Apache HTTP Server Manual</span>
+<span style="color:#75715e">#Include conf/extra/httpd-manual.conf</span>
+
+<span style="color:#75715e"># Distributed authoring and versioning (WebDAV)</span>
+<span style="color:#75715e">#Include conf/extra/httpd-dav.conf</span>
+
+<span style="color:#75715e"># Various default settings</span>
+<span style="color:#75715e">#Include conf/extra/httpd-default.conf</span>
+
+<span style="color:#75715e"># 配置 mod_proxy_html 去理解 HTML4/XHTML1</span>
+&lt;IfModule proxy_html_module&gt;
+Include conf/extra/httpd-proxy-html.conf
+&lt;/IfModule&gt;
+
+<span style="color:#75715e"># Secure (SSL/TLS) connections</span>
+<span style="color:#75715e"># Note: The following must must be present to support</span>
+<span style="color:#75715e">#       starting without SSL on platforms with no /dev/random equivalent</span>
+<span style="color:#75715e">#       but a statically compiled-in mod_ssl.</span>
+<span style="color:#75715e">#</span>
+&lt;IfModule ssl_module&gt;
+<span style="color:#75715e">#Include conf/extra/httpd-ssl.conf</span>
+Include conf/extra/httpd-ahssl.conf
+SSLRandomSeed startup builtin
+SSLRandomSeed connect builtin
+&lt;/IfModule&gt;
+&lt;IfModule http2_module&gt;
+    ProtocolsHonorOrder On
+    Protocols h2 h2c http/1.1
+&lt;/IfModule&gt;
+
+<span style="color:#75715e">#Include conf/mod_jk.conf</span>
+&lt;VirtualHost *:80&gt;
+
+ServerName one.test.com
+ProxyPreserveHost On
+ProxyRequests Off
+&lt;Proxy *&gt;
+Order deny,allow
+Allow from all
+&lt;/Proxy&gt;
+ProxyPass / http://127.0.0.1:8080/
+ProxyPassReverse / http://127.0.0.1:8080/
+&lt;/VirtualHost&gt;
+</code></pre></div></article>
+    </section>
+
+    <footer class="ui attached segment dream-tags" data-html2canvas-ignore>
+      
+        
+          <a class="ui label" href="/tags/freebsd" title="FreeBSD">FreeBSD</a>
+        
+          <a class="ui label" href="/tags/apache" title="Apache">Apache</a>
+        
+      
+      <div
+        class="ui label"
+        style="float: right; cursor: pointer;"
+        onclick="savePostAsImg()">
+        <i class="save icon"></i>保存为图片
+      </div>
+    </footer>
+
+    
+      <footer class="ui attached segment" data-html2canvas-ignore>
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+      </footer>
+    
+
+    
+      <footer class="ui bottom attached stacked segment post-disqus-area" data-html2canvas-ignore>
+        <div id="disqus_thread"></div>
+        <script>
+          
+
+
+          var disqus_config = function () {
+            this.page.url = 'https:\/\/mianmian7.me\/posts\/1\/';  
+            this.page.identifier = '\/posts\/1\/'; 
+          };
+
+          (function() { 
+            var d = document, s = d.createElement('script');
+            s.src = 'https://' + 'mianmian7' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </footer>
+    
+    
+    
+      <div class="ui segment utterances-comments" data-html2canvas-ignore>
+        <script src="https://utteranc.es/client.js"
+          repo="mianmian7/mianmian7.github.io"
+          issue-term="og:title"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+        </script>
+      </div>
+    
+
+    
+
+  </div>
+  <div class="sixteen wide mobile sixteen wide tablet four wide computer column">
+    <article class="dream-header">
+  <section class="ui top attached center aligned segment">
+    <div class="ui small circular image">
+      
+        <img src="/me/yy.jpg">
+      
+    </div>
+
+    
+    <div class="ui medium header">
+    
+      mianmian7 的博客
+      <div class="sub header" style="margin-top: 0.5rem;">与其感慨路难行，不如马上出发。</div>
+    
+    </div>
+    
+
+    <div class="ui horizontal list">
+      
+      <a class="item" href="/posts">
+        <i class="archive icon" title="归档"></i>
+      </a>
+      
+      <a class="item" href="/tags">
+        <i class="tags icon" title="所有标签"></i>
+      </a>
+      <a class="item" href="/categories">
+        <i class="th list icon" title="所有分类"></i>
+      </a>
+    </div>
+  </section>
+
+  
+  <section class="ui attached center aligned segment dream-tags">
+    
+      <a class="ui label" href="/tags/apache" title="apache">apache</a>
+    
+      <a class="ui label" href="/tags/freebsd" title="freebsd">freebsd</a>
+    
+      <a class="ui label" href="/tags/pw" title="pw">pw</a>
+    
+      <a class="ui label" href="/tags/rclone" title="rclone">rclone</a>
+    
+  </section>
+  
+
+  
+  <section class="ui attached segment dream-categories">
+    <div class="ui accordion">
+      
+      
+      
+      
+      
+
+      
+        
+
+        
+          <div class="title">
+            <i class="dropdown icon"></i>
+            <a href="/categories/linux/unix%E7%9B%B8%E5%85%B3" class="item">linux/unix相关</a>
+          </div>
+          <div class="content">
+            <div class="ui list">
+            
+              <div class="item">
+                <div class="content">
+                  <a href="/posts/freebsd%E7%B3%BB%E7%BB%9Fpw%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" class="item">FreeBSD系统pw用户管理</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a href="/posts/rclone%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="item">RCLONE常用命令</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a href="/posts/1/" class="item">Apache 默认配置文件httpd.conf</a>
+                </div>
+              </div>
+            
+              <div class="item">
+                <div class="content">
+                  <a href="/posts/0/" class="item">FreeBSD Apache</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        
+      
+
+      
+    </div>
+  </section>
+  
+
+  <section class="ui attached segment header-socials">
+    <nav class="ui secondary menu dream-menu dream-socials">
+  
+    <div class="item">
+      <a href="/index.xml">
+        <i class=" rss square icon" title="RSS"></i>
+      </a>
+    </div>
+  
+  
+    <div class="item">
+      <a href="mailto:m18259132549@gmail.com">
+        <i class=" mail icon" title="Email"></i>
+      </a>
+    </div>
+  
+
+  
+    <div class="item">
+      <a href="https://twitter.com/mianmian7" target="_blank">
+        <i class=" twitter icon" title="Twitter"></i>
+      </a>
+    </div>
+  
+
+  
+    <div class="item">
+      <a href="https://facebook.com/mianmian7" target="_blank">
+        <i class=" facebook icon" title="Facebook"></i>
+      </a>
+    </div>
+  
+
+  
+    <div class="item">
+      <a href="https://instagram.com/mianmian7" target="_blank">
+        <i class=" instagram icon" title="Instagram"></i>
+      </a>
+    </div>
+  
+
+  
+
+  
+    <div class="item">
+      <a href="https://www.linkedin.com/in/mianmian7" target="_blank">
+        <i class=" linkedin icon" title="Linkedin"></i>
+      </a>
+    </div>
+  
+
+  
+    <div class="item">
+      <a href="https://github.com/mianmian7" target="_blank">
+        <i class=" github icon" title="GitHub"></i>
+      </a>
+    </div>
+  
+
+  
+    <div class="item">
+      <a href="https://www.stackoverflow.com/users/5676489/mianmian7" target="_blank">
+        <i class=" stack overflow icon" title="StackOverflow"></i>
+      </a>
+    </div>
+  
+
+  
+    <div class="item">
+      <a href="https://codepen.io/mianmian7" target="_blank">
+        <i class=" codepen icon" title="Codepen"></i>
+      </a>
+    </div>
+  
+</nav>
+
+  </section>
+
+  <section class="ui bottom attached center aligned segment">
+    
+      <p>© 2020 mianmian7 的博客</p>
+    
+
+    <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+
+    
+  </section>
+</article>
+
+  </div>
+</div>
+
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            <div class="ui centered relaxed grid dream-grid dream-back">
+  
+  
+  
+    <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+      <article>
+        <div class="ui top attached segment">
+          <h3 class="ui header">关于我</h3>
+        </div>
+        <div class="ui bottom attached segment markdown-body">
+          <p>mianmian7 的 ❤️ 博客</p>
+<p>记录一些 🌈 生活上，技术上的事</p>
+<p>一名大三学生</p>
+<p>主要的技术栈是：</p>
+<ul>
+<li>Java &amp; SSM</li>
+<li>Spring Boot</li>
+<li>Spring Cloud</li>
+</ul>
+<p>写着玩（写过）：</p>
+<ul>
+<li>JavaScript &amp; TypeScript</li>
+<li>Vue &amp; React.js</li>
+<li>Python &amp; Perl</li>
+</ul>
+<p>&ndash; 2020 年 10 月 27 日更新</p>
+
+        </div>
+      </article>
+    </section>
+  
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article>
+      <div class="ui top attached segment">
+        <h3 class="ui header">社交链接</h3>
+      </div>
+      <div class="ui bottom attached segment">
+        <nav class="ui secondary menu dream-menu dream-socials">
+  
+    <div class="item">
+      <a href="/index.xml">
+        <i class="large rss square icon" title="RSS"></i>
+      </a>
+    </div>
+  
+  
+    <div class="item">
+      <a href="mailto:m18259132549@gmail.com">
+        <i class="large mail icon" title="Email"></i>
+      </a>
+    </div>
+  
+
+  
+    <div class="item">
+      <a href="https://twitter.com/mianmian7" target="_blank">
+        <i class="large twitter icon" title="Twitter"></i>
+      </a>
+    </div>
+  
+
+  
+    <div class="item">
+      <a href="https://facebook.com/mianmian7" target="_blank">
+        <i class="large facebook icon" title="Facebook"></i>
+      </a>
+    </div>
+  
+
+  
+    <div class="item">
+      <a href="https://instagram.com/mianmian7" target="_blank">
+        <i class="large instagram icon" title="Instagram"></i>
+      </a>
+    </div>
+  
+
+  
+
+  
+    <div class="item">
+      <a href="https://www.linkedin.com/in/mianmian7" target="_blank">
+        <i class="large linkedin icon" title="Linkedin"></i>
+      </a>
+    </div>
+  
+
+  
+    <div class="item">
+      <a href="https://github.com/mianmian7" target="_blank">
+        <i class="large github icon" title="GitHub"></i>
+      </a>
+    </div>
+  
+
+  
+    <div class="item">
+      <a href="https://www.stackoverflow.com/users/5676489/mianmian7" target="_blank">
+        <i class="large stack overflow icon" title="StackOverflow"></i>
+      </a>
+    </div>
+  
+
+  
+    <div class="item">
+      <a href="https://codepen.io/mianmian7" target="_blank">
+        <i class="large codepen icon" title="Codepen"></i>
+      </a>
+    </div>
+  
+</nav>
+
+      </div>
+    </article>
+  </section>
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+      <footer class="ui segment">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+      </footer>
+    
+  </section>
+
+  
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+  window.backgroundDark = "black"
+  window.backgroundImageDark = "/me/background-dark.jpg"
+  window.darkNav =  true 
+  window.hasTwitterEmbed =  null 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/semantic.min.js"></script>
+<script src="/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+<script src="/js/html2canvas.min.js"></script>
+<script src="/js/post.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
+
+  
+    
+      <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/languages/ocaml.min.js"></script>
+     
+  
+
+  <script>
+  hljs.initHighlightingOnLoad()
+  setHighlightTheme()
+
+  function setHighlightTheme() {
+    var isDark = localStore.getItem('hugo-theme-dream-is-dark')
+    var lightTheme = "gruvbox-light"
+    var darkTheme = "gruvbox-dark"
+    var theme = isDark ? darkTheme : lightTheme
+
+    $('link[data-highlight]').attr('href', 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/' + theme + '.min.css')
+    $('pre').css('background', isDark ? '#333' : '')
+  }
+</script>
+
+
+
+
+
+    
+      <div class="ui inverted segment" id="dream-search">
+  <div class="ui search">
+    <div class="ui transparent input">
+      <input class="prompt" type="text" placeholder="搜索" />
+    </div>
+    <div class="results"></div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $.getJSON('https:\/\/mianmian7.me/index.json', function (data) {
+      $('.ui.search').search({
+        source: data,
+        searchFields: ['title'],
+        showNoResults: true,
+      })
+    })
+  })
+</script>
+<script src="/js/search.js"></script>
+
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-98295641-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>
